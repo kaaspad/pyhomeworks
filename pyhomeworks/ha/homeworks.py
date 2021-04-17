@@ -82,7 +82,7 @@ class HomeworksDevice(Entity):
 
     async def async_added_to_hass(self):
         """Register callback."""
-        self.hass.async_add_job(self._controller.subscribe, self)
+        self.hass.async_add_job(self._controller._subscribe, self)
 
     @property
     def addr(self):
