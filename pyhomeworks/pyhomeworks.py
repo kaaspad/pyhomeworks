@@ -59,6 +59,7 @@ class Homeworks(Thread):
     _socket: socket.socket
 
     LOGIN_REQUEST = b'LOGIN: '
+    PROMPT_REQUESTS = [b'LNET> ', b'L232> ']
     POLLING_FREQ = 1.
     LOGIN_PROMPT_WAIT_TIME = 0.2
 
@@ -123,6 +124,10 @@ class Homeworks(Thread):
                     readable, _, _ = select.select([self._socket], [], [], self.POLLING_FREQ)
                     if len(readable) != 0:
                         buffer += self._socket.recv(1024)
+                        for prompt in self.PROMPT_REQUESTS:
+                            if buffer.startswith(prompt):
+                                logged_in = True
+                                buffer = buffer[len(prompt):]
                         if buffer.startswith(self.LOGIN_REQUEST):
                             self._handle_login_request()
                             logged_in = True

@@ -101,10 +101,10 @@ def assert_subscribe(hw_device, socket_mock):
     socket_mock.send.assert_any_call(b'GSMON\r\n')
     socket_mock.send.assert_any_call(b'DLMON\r\n')
     socket_mock.send.assert_any_call(b'KLMON\r\n')
-    hw_device.send.assert_any_call(b'Keypad button monitoring enabled\r\n')
-    hw_device.send.assert_any_call(b'GrafikEye scene monitoring enabled\r\n')
-    hw_device.send.assert_any_call(b'Dimmer level monitoring enabled\r\n')
-    hw_device.send.assert_any_call(b'Keypad led monitoring enabled\r\n')
+    hw_device.send.assert_any_call(b'Keypad button monitoring enabled')
+    hw_device.send.assert_any_call(b'GrafikEye scene monitoring enabled')
+    hw_device.send.assert_any_call(b'Dimmer level monitoring enabled')
+    hw_device.send.assert_any_call(b'Keypad led monitoring enabled')
 
 
 def test_connect_with_login(hw_device, lib_with_login, socket_mock):
@@ -128,5 +128,5 @@ def test_connect_with_login(hw_device, lib_with_login, socket_mock):
 
 
 def assert_login(hw_device):
-    assert hw_device.send.call_args_list[0] == call(b'LOGIN: ')
+    assert hw_device.send.call_args_list[0] == call(b'LOGIN: ', line_ending=False)
     assert hw_device.receive.call_args_list[0] == call(b'user,password\r\n')
