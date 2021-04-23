@@ -14,7 +14,7 @@ setuptools.setup(
     url="https://github.com/dubnom/pyhomeworks",
     packages=setuptools.find_packages(include=['pyhomeworks']),
     extras_require={
-        "test": ["pytest", "pytest-mock"]
+        "test": ["pytest", "pytest-mock", "pytest-asyncio"]
     },
     classifiers=[
         "Programming Language :: Python :: 3",
